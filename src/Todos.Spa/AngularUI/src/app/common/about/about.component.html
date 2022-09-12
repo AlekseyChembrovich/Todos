@@ -1,0 +1,30 @@
+
+<div class="card mt-2 bg-dark text-white rounded border border-secondary">
+  <div class="card-header">About us</div>
+  <div class="card-body">
+    <h5 class="card-title">Your plans are our responsibility.</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="d-flex flex-row bd-highlight mt-3 align-items-center">
+  <div class="p-2 bd-highlight">
+    <figure class="figure">
+      <img src="assets/images/dark-list.png" class="figure-img img-fluid rounded" alt="Image">
+      <figcaption class="figure-caption text-end">A caption for the above image.</figcaption>
+    </figure>
+  </div>
+  <div class="p-2 bd-highlight">
+    <h3>More important tips: </h3>
+
+    <ol class="list-group list-group-numbered">
+      <li class="list-group-item bg-dark text-white border-secondary" *ngFor="let tip of tips">
+        {{tip}}
+      </li>
+    </ol>
+
+    <div class="d-grid mt-2">
+      <a class="btn btn-outline-info" type="button" routerLink="todos">Go todo-list</a>
+    </div>
+  </div>
+</div>

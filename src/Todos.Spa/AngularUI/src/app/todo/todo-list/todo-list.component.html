@@ -1,0 +1,16 @@
+<app-todo-form (createEvent)="create($event)"></app-todo-form>
+
+<ng-container *ngIf="isLoaded && (todos$ | async) as todos; else loading">
+  <div *ngIf="todos.length > 0">
+    <app-todo-card
+      *ngFor="let todo of todos"
+      [todo]="todo"
+      (changeEvent)="change($event)"
+      (deleteEvent)="delete($event)">
+    </app-todo-card>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <h3 class="text-white">Loading...</h3>
+</ng-template>

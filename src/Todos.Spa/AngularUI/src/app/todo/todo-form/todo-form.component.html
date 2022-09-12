@@ -1,0 +1,25 @@
+<form class="mt-2 mb-3" [formGroup]="todoForm">
+
+  <div class="row">
+    <div class="col">
+      <label for="task" class="form-label">Task text:</label>
+      <input id="task"
+             type="text"
+             placeholder="Enter task text"
+             formControlName="task"
+             class="form-control"
+             autofocus>
+    </div>
+
+    <div class="col">
+      <label for="expirationDate" class="form-label">Expiration task:</label>
+      <input id="expirationDate"
+             type="date"
+             placeholder="Enter expiration date"
+             formControlName="expirationDate"
+             class="form-control">
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success mt-2" (click)="create()" [disabled]="todoForm.invalid">Create</button>
+</form>

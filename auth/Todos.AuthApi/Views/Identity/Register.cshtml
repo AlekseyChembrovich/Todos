@@ -1,0 +1,55 @@
+﻿@model RegisterUser
+@{
+    ViewData["Title"] = "Registration page";
+}
+
+<div class="container w-75 mt-5">
+    <div>
+        <h3>Registration page.</h3>
+        <p>Your security is our responsibility.</p>
+    </div>
+
+    <form asp-controller="Auth" asp-action="Register" method="post">
+        <div>
+            <label for="user_name">User name: </label>
+            <input 
+                class="form-control"
+                type="text"
+                id="user_name" 
+                asp-for="UserName" 
+                placeholder="Enter user name" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+
+        <div class="mt-2">
+            <label for="user_password">User password: </label>
+            <input 
+                class="form-control"
+                type="password" 
+                id="user_password" 
+                asp-for="Password" 
+                placeholder="Enter your password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div class="mt-2">
+            <label for="confirm_password">Confirm password: </label>
+            <input 
+                class="form-control"
+                type="password" 
+                id="confirm_password" 
+                asp-for="ConfirmPassword" 
+                placeholder="Confirm your password" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+
+        <div class="mt-2">
+            <input type="hidden" asp-for="ReturnUrl" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-success mt-2">Register</button>
+        </div>
+    </form>
+</div>
+

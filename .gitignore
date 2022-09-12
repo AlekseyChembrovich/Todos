@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/auth/Todos.AuthApi/bin/Debug/net6.0
+/.vs/Todos
+/auth/Todos.AuthApi/obj
+/src/Todos.Api/bin/Debug/net6.0
+/src/Todos.Api/obj
+/src/Todos.Application/bin/Debug/net6.0
+/src/Todos.Application/obj
+/src/Todos.AuthApi/obj
+/src/Todos.Domain/bin/Debug/net6.0
+/src/Todos.Domain/obj
+/src/Todos.Infrastructure/bin/Debug/net6.0
+/src/Todos.Infrastructure/obj
+/src/Todos.Spa/obj
+/src/Todos.Spa/AngularUI/.vscode

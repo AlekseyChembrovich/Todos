@@ -1,0 +1,49 @@
+<div class="card mt-2 bg-dark text-white rounded border bg-secondary" *ngIf="todo">
+  <div class="card-body">
+
+    <form [formGroup]="todoForm">
+
+      <div class="row">
+        <div class="col">
+          <label for="task" class="form-label">#1 Task text</label>
+          <input id="task"
+                 type="text"
+                 placeholder="Enter task text"
+                 formControlName="task"
+                 [readonly]="isDisableTask"
+                 (dblclick)="isDisableTask = false"
+                 (focusout)="isDisableTask = true"
+                 class="form-control">
+        </div>
+
+        <div class="col">
+          <label for="createdDate" class="form-label">#2 Created task</label>
+          <input id="createdDate"
+                 type="date"
+                 [readonly]="true"
+                 placeholder="Enter created date"
+                 formControlName="createdDate"
+                 class="form-control">
+        </div>
+
+        <div class="col">
+          <label for="expirationDate" class="form-label">#3 Expiration task</label>
+          <input id="expirationDate"
+                 type="date"
+                 placeholder="Enter expiration date"
+                 formControlName="expirationDate"
+                 [readonly]="isDisableExpirationDate"
+                 (dblclick)="isDisableExpirationDate = false"
+                 (focusout)="isDisableExpirationDate = true"
+                 class="form-control">
+        </div>
+      </div>
+
+      <div class="btn-group mt-2" role="group">
+        <button type="button" class="btn btn-danger" (click)="delete()">Delete</button>
+        <button type="button" class="btn btn-warning" (click)="change()" [disabled]="todoForm.invalid">Change</button>
+      </div>
+    </form>
+
+  </div>
+</div>
