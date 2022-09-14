@@ -16,3 +16,4 @@
 /src/Todos.Infrastructure/obj
 /src/Todos.Spa/obj
 /src/Todos.Spa/AngularUI/.vscode
+/src/Todos.Api/log

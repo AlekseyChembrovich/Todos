@@ -1,10 +1,19 @@
-﻿using Microsoft.OpenApi.Models;
-using System.Security.Claims;
+﻿using Serilog;
+using Microsoft.OpenApi.Models;
 
 namespace Todos.Api.Configuration;
 
 public static class ServicesConfiguration
 {
+    public static void SetUpSerilog(IConfiguration configuration)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .Enrich.FromLogContext()
+            .ReadFrom.Configuration(configuration)
+            .CreateBootstrapLogger();
+    }
+
     public static IServiceCollection AddCorsPolicy(this IServiceCollection services, string policyKey)
     {
         services.AddCors(options =>
@@ -57,12 +66,13 @@ public static class ServicesConfiguration
         return services;
     }
 
-    public static IServiceCollection AddIdentityAuthentication(this IServiceCollection services)
+    public static IServiceCollection AddIdentityAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAuthentication("Bearer")
             .AddJwtBearer("Bearer", options =>
             {
-                options.Authority = "https://localhost:5003/";     
+                var authority = configuration.GetValue<string>("AuthConfig:Authority"); // "http://localhost:5003/"
+                options.Authority = authority;     
                 options.TokenValidationParameters = new()
                 {
                     ValidateAudience = false

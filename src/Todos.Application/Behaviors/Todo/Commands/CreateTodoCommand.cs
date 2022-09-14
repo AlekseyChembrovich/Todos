@@ -24,12 +24,12 @@ public class CreateNewTodoCommandHandler : IRequestHandler<CreateTodoCommand, To
 
     public async Task<TodoDto> Handle(CreateTodoCommand request, CancellationToken cancellationToken)
     {
-        var userId = _userContext.GetUserId();
+        var user = _userContext.GetUser();
         var todoItem = new TodoItem
         {
             Task = request.Task,
             ExpirationDate = request.ExpirationDate,
-            UserId = userId
+            UserId = user.Id
         };
 
         var createdTodoItem = await _todoService.CreateTodoAsync(todoItem);

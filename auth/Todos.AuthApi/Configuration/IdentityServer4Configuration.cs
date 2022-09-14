@@ -6,48 +6,61 @@ namespace Todos.AuthApi.Configuration;
 
 public class IdentityServer4Configuration
 {
-    public static IEnumerable<ApiScope> ApiScopes = new List<ApiScope>
+    public static IEnumerable<ApiScope> GetApiScopes()
     {
-        new ApiScope("first_scope")
-    };
-
-    public static IEnumerable<ApiResource> ApiResources = new List<ApiResource>
-    {
-        new ApiResource("first_scope", "first_scope", new[] { JwtClaimTypes.Role })
+        return new List<ApiScope>
         {
-            Scopes = { "first_scope" }
-        }
-    };
+            new ApiScope("first_scope")
+        };
+    }
 
-    public static IEnumerable<IdentityResource> IdentityResources = new List<IdentityResource>
+    public static IEnumerable<ApiResource> GetApiResources()
     {
-        new IdentityResources.OpenId(),
-        new IdentityResources.Profile()
-    };
-
-    public static IEnumerable<Client> Clients = new List<Client>
-    {
-        new Client
+        return new List<ApiResource>
         {
-            ClientId = "angular",
-
-            AllowedGrantTypes = GrantTypes.Code,
-            RequireClientSecret = false,
-            RequirePkce = true,
-
-            RedirectUris = { "http://localhost:4200" },
-            PostLogoutRedirectUris = { "http://localhost:4200" },
-            AllowedCorsOrigins = { "http://localhost:4200" },
-
-            AllowedScopes =
+            new ApiResource("first_scope", "first_scope", new[] { JwtClaimTypes.Role, JwtClaimTypes.Name })
             {
-                IdentityServerConstants.StandardScopes.OpenId,
-                IdentityServerConstants.StandardScopes.Profile,
-                "first_scope"
-            },
+                Scopes = { "first_scope" }
+            }
+        };
+    }
 
-            AllowAccessTokensViaBrowser = true,
-            RequireConsent = false
-        }
-    };
+    public static IEnumerable<IdentityResource> GetIdentityResources()
+    {
+        return new List<IdentityResource>
+        {
+            new IdentityResources.OpenId(),
+            new IdentityResources.Profile()
+        };
+    }
+
+    public static IEnumerable<Client> GetClients(IConfiguration configuration)
+    {
+        var client = configuration.GetValue<string>("AuthConfig:Client");
+        return new List<Client>
+        {
+            new Client
+            {
+                ClientId = "angular",
+
+                AllowedGrantTypes = GrantTypes.Code,
+                RequireClientSecret = false,
+                RequirePkce = true,
+
+                RedirectUris = { client },
+                PostLogoutRedirectUris = { client },
+                AllowedCorsOrigins = { client },
+
+                AllowedScopes =
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "first_scope"
+                },
+
+                AllowAccessTokensViaBrowser = true,
+                RequireConsent = false
+            }
+        };
+    }
 }

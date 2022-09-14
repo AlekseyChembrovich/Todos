@@ -7,6 +7,12 @@ import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { LogLevel, AuthModule as OidcModule } from "angular-auth-oidc-client";
 import { environment } from "../../environments/environment";
 
+const getApplicationUrl = () => {
+  const protocol = window.location.protocol
+  const host = window.location.host
+  return `${protocol}//${host}`
+}
+
 @NgModule({
   declarations: [AuthMenuComponent],
   imports: [CommonModule,
@@ -15,8 +21,8 @@ import { environment } from "../../environments/environment";
       clientId: 'angular',
       authority: environment.authApi,
       responseType: 'code',
-      redirectUrl: "http://localhost:4200",
-      postLogoutRedirectUri: "http://localhost:4200",
+      redirectUrl: getApplicationUrl(), // "http://localhost:4200"
+      postLogoutRedirectUri: getApplicationUrl(), // "http://localhost:4200"
       scope: 'first_scope openid profile',
       logLevel: LogLevel.Debug
     },

@@ -1,32 +1,52 @@
 version: '3.1'
 
 services:
-  mongo:
+  mongo_db:
     image: mongo
-    container_name: mongo
+    container_name: mongo_db
     restart: always
     ports:
-    - '5005:27017'
+      - '5005:27017'
     environment:
       MONGO_INITDB_ROOT_USERNAME: guest
       MONGO_INITDB_ROOT_PASSWORD: guest
 
-  todosapi:
+  todos_api:
     image: todosapi
-    container_name: todosapi
-    build: .
+    container_name: todos_api
+    build:
+        context: .
+        dockerfile: src/Todos.Api/Dockerfile
     restart: always
     ports:
-    - '5001:80'
+      - '5001:80'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
     links:
-    - 'mongo'
+      - 'mongo_db'
 
-  authapi:
+  auth_api:
     image: authapi
-    container_name: authapi
-    build: .
+    container_name: auth_api
+    build:
+        context: .
+        dockerfile: auth/Todos.AuthApi/Dockerfile
     restart: always
     ports:
-    - '5003:80'
+      - '5003:80'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
     links:
-    - 'todosapi'
+      - 'todos_api'
+
+  todos_ui:
+    image: todosui
+    container_name: todos_ui
+    build:
+        context: ./src/Todos.Spa/AngularUI
+        dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '5007:80'
+    links:
+      - 'auth_api'

@@ -35,7 +35,7 @@ app.Run();
 
 void RegistrationServices(IServiceCollection services)
 {
-    services.AddIdentityServer4();
+    services.AddIdentityServer4(configuration);
 
     services.AddCorsPolicy(LocalCorsPolicyKey);
     services.AddEndpointsApiExplorer();

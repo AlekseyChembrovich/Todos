@@ -1,8 +1,10 @@
 using Todos.Api.Services;
+using Todos.Api.Middleware;
 using Todos.Api.Configuration;
 using Todos.Application.Interfaces;
 using Todos.Application.Configuration;
 using Todos.Infrastructure.Configuration;
+using ApiConfig = Todos.Api.Configuration;
 
 const string LocalCorsPolicyKey = nameof(LocalCorsPolicyKey);
 
@@ -10,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
 var environment = builder.Environment;
+
+ApiConfig.ServicesConfiguration.SetUpSerilog(configuration);
 
 ConfigureServices(builder.Services);
 
@@ -27,7 +31,7 @@ void ConfigureServices(IServiceCollection services)
     services.AddCorsPolicy(LocalCorsPolicyKey);
     services.AddOpenApi();
     services.AddEndpointsApiExplorer();
-    services.AddIdentityAuthentication();
+    services.AddIdentityAuthentication(configuration);
 
     services.AddHttpContextAccessor();
     services.AddTransient<IUserContextService, UserContextService> ();
@@ -47,6 +51,8 @@ void ConfigureMiddleware(WebApplication app)
 
     app.UseAuthentication();
     app.UseAuthorization();
+
+    app.UseMiddleware<LogEnrichMiddleware>();
 
     app.UseEndpoints(endpoints =>
     {

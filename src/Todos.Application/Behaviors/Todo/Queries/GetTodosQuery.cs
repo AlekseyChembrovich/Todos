@@ -19,8 +19,8 @@ public class GetAllTodosQueryHandler : IRequestHandler<GetTodosQuery, IEnumerabl
 
     public async Task<IEnumerable<TodoDto>> Handle(GetTodosQuery request, CancellationToken cancellationToken)
     {
-        var userId = _userContext.GetUserId();
-        var todoItems = await _todoService.GetTodosAsync(userId);
+        var user = _userContext.GetUser();
+        var todoItems = await _todoService.GetTodosAsync(user.Id);
 
         var todoDtos = todoItems.Select(todoItem => new TodoDto
         {

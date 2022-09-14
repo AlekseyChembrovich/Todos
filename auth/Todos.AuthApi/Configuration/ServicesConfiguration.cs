@@ -23,7 +23,7 @@ public static class ServicesConfiguration
         return services;
     }
 
-    public static IServiceCollection AddIdentityServer4(this IServiceCollection services)
+    public static IServiceCollection AddIdentityServer4(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddIdentity<IdentityUser, IdentityRole>(setup =>
         {
@@ -32,16 +32,15 @@ public static class ServicesConfiguration
             setup.Password.RequireNonAlphanumeric = false;
             setup.Password.RequireLowercase = false;
             setup.Password.RequireUppercase = false;
-        })
-            .AddEntityFrameworkStores<IdentitiesDbContext>()
-            .AddDefaultTokenProviders();
+        }).AddEntityFrameworkStores<IdentitiesDbContext>()
+          .AddDefaultTokenProviders();
 
         services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
-                .AddInMemoryApiScopes(IdentityServer4Configuration.ApiScopes)
-                .AddInMemoryApiResources(IdentityServer4Configuration.ApiResources)
-                .AddInMemoryIdentityResources(IdentityServer4Configuration.IdentityResources)
-                .AddInMemoryClients(IdentityServer4Configuration.Clients)
+                .AddInMemoryApiScopes(IdentityServer4Configuration.GetApiScopes())
+                .AddInMemoryApiResources(IdentityServer4Configuration.GetApiResources())
+                .AddInMemoryIdentityResources(IdentityServer4Configuration.GetIdentityResources())
+                .AddInMemoryClients(IdentityServer4Configuration.GetClients(configuration))
                 .AddDeveloperSigningCredential();
 
         services.ConfigureApplicationCookie(config =>

@@ -1,6 +1,8 @@
-﻿namespace Todos.Application.Interfaces;
+﻿using Todos.Application.Common.Models;
+
+namespace Todos.Application.Interfaces;
 
 public interface IUserContextService
 {
-    string GetUserId();
+    User GetUser();
 }
