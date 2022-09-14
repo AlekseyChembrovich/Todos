@@ -1,2 +1,0 @@
-{"Timestamp":"2022-09-14T17:01:25.7808019+03:00","Level":"Information","MessageTemplate":"Log enrich middleware","Properties":{"UserName":"Guest12345","UserId":"c196c85f-ca37-4f55-944b-a59dd766984b"}}
-{"Timestamp":"2022-09-14T17:09:59.2189500+03:00","Level":"Information","MessageTemplate":"Get user list of todos.","Properties":{"UserName":"Guest12345","UserId":"7bd0c234-ab1f-4ba9-9e9c-035afe8f849d"}}
