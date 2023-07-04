@@ -1,5 +1,5 @@
 ﻿using Serilog.Context;
-using Todos.Application.Interfaces;
+using Todos.Application.Common.Interfaces;
 
 namespace Todos.Api.Middleware;
 

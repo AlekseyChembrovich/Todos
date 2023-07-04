@@ -11,15 +11,15 @@ export class TodoFormComponent {
   createEvent: EventEmitter<ITodo> = new EventEmitter<ITodo>();
 
   todoForm = new FormGroup({
-    task: new FormControl('', Validators.required),
+    title: new FormControl('', Validators.required),
     expirationDate: new FormControl('', Validators.required),
   });
 
   create() {
     let todo: ITodo = {
-      Task: this.todoForm.value.task,
-      CreatedDate: new Date(),
-      ExpirationDate: this.todoForm.value.expirationDate
+      title: this.todoForm.value.title,
+      createdAt: new Date(),
+      expiryDate: this.todoForm.value.expirationDate
     }
 
     this.createEvent.emit(todo)

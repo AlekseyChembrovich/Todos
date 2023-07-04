@@ -17,7 +17,7 @@ export class TodoCardComponent implements OnInit {
   @Output()
   changeEvent: EventEmitter<ITodo> = new EventEmitter<ITodo>()
 
-  isDisableTask: boolean = true;
+  isDisableTitle: boolean = true;
   isDisableExpirationDate: boolean = true;
 
   todoForm: FormGroup = new FormGroup({});
@@ -25,10 +25,11 @@ export class TodoCardComponent implements OnInit {
   constructor(private datePipe: DatePipe) { }
 
   ngOnInit() {
-    let createdDateFormat = this.datePipe.transform(this.todo?.CreatedDate, 'yyyy-MM-dd')
-    let expirationDateFormat = this.datePipe.transform(this.todo?.ExpirationDate, 'yyyy-MM-dd')
+    let createdDateFormat = this.datePipe.transform(this.todo?.createdAt, 'yyyy-MM-dd')
+    let expirationDateFormat = this.datePipe.transform(this.todo?.expiryDate, 'yyyy-MM-dd')
+
     this.todoForm = new FormGroup({
-      task: new FormControl(this.todo?.Task, Validators.required),
+      title: new FormControl(this.todo?.title, Validators.required),
       createdDate: new FormControl(createdDateFormat, Validators.required),
       expirationDate: new FormControl(expirationDateFormat, Validators.required)
     })
@@ -40,7 +41,7 @@ export class TodoCardComponent implements OnInit {
       return
     }
     console.log('call delete event.')
-    this.deleteEvent.emit(this.todo.Id)
+    this.deleteEvent.emit(this.todo.id)
   }
 
   change(): void {
@@ -49,13 +50,13 @@ export class TodoCardComponent implements OnInit {
       return
     }
     let changedTodo: ITodo = {
-      Id: this.todo.Id,
-      Task: this.todoForm.value.task,
-      CreatedDate: this.todoForm.value.createdDate,
-      ExpirationDate: this.todoForm.value.expirationDate
+      id: this.todo.id,
+      title: this.todoForm.value.title,
+      createdAt: this.todoForm.value.createdDate,
+      expiryDate: this.todoForm.value.expirationDate
     }
     this.changeEvent.emit(changedTodo)
-    this.isDisableTask = true;
+    this.isDisableTitle = true;
     this.isDisableExpirationDate = true;
   }
 }

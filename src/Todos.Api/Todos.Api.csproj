@@ -7,6 +7,7 @@
     <UserSecretsId>d049181d-8c5b-4f65-883e-2aa034bdfa98</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +22,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Todos.Application\Todos.Application.csproj" />
-    <ProjectReference Include="..\Todos.Infrastructure\Todos.Infrastructure.csproj" />
+    <ProjectReference Include="..\Todos.Infrastructure.Dapper\Todos.Infrastructure.Dapper.csproj" />
+    <ProjectReference Include="..\Todos.Infrastructure.EfCore\Todos.Infrastructure.EfCore.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://download.stackhawk.com/hawk/jsonschema/hawkconfig.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

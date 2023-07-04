@@ -9,24 +9,24 @@ export class TodoService {
   constructor(private httpClient: HttpClient) { }
 
   public getTodos(): Observable<ITodo[]> {
-    return this.httpClient.get<ITodo[]>(`${environment.resourceApi}/api/todos`);
+    return this.httpClient.get<ITodo[]>(`${environment.resourceApi}/api/notes`);
   }
 
   public getTodoById(id: string): Observable<ITodo> {
-    return this.httpClient.get<ITodo>(`${environment.resourceApi}/api/todos/${id}`)
+    return this.httpClient.get<ITodo>(`${environment.resourceApi}/api/notes/${id}`)
   }
 
   public removeTodo(id: string): Observable<any> {
-    return this.httpClient.delete(`${environment.resourceApi}/api/todos/${id}`)
+    return this.httpClient.delete(`${environment.resourceApi}/api/notes/${id}`)
   }
 
   public updateTodo(todo: ITodo): Observable<ITodo> {
-    return this.httpClient.put(`${environment.resourceApi}/api/todos`, todo).pipe(
+    return this.httpClient.put(`${environment.resourceApi}/api/notes`, todo).pipe(
       mapTo(todo)
     )
   }
 
   public createTodo(todo: ITodo): Observable<ITodo> {
-    return this.httpClient.post<ITodo>(`${environment.resourceApi}/api/todos`, todo)
+    return this.httpClient.post<ITodo>(`${environment.resourceApi}/api/notes`, todo)
   }
 }

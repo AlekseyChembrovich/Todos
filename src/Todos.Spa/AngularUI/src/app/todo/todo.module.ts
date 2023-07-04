@@ -6,6 +6,7 @@ import { CommonModule, DatePipe } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 import { TodoFormComponent } from "./todo-form/todo-form.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { TodoHub } from "./todo.hub";
 
 const routes: Routes = [
   { path: 'todos', component: TodoListComponent }
@@ -14,7 +15,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [TodoCardComponent, TodoListComponent, TodoFormComponent],
   imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule],
-  providers: [TodoService, DatePipe]
+  providers: [TodoService, TodoHub, DatePipe]
 })
 export class TodoModule {
 }

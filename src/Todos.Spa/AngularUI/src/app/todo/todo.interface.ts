@@ -1,6 +1,6 @@
 export interface ITodo {
-  Id?: string,
-  Task: string,
-  CreatedDate: Date,
-  ExpirationDate: Date
+  id?: string,
+  title: string,
+  createdAt: Date,
+  expiryDate: Date
 }

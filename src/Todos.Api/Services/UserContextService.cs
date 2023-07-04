@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
-using Todos.Application.Interfaces;
 using Todos.Application.Common.Models;
+using Todos.Application.Common.Interfaces;
 
 namespace Todos.Api.Services;
 
